@@ -2,9 +2,12 @@
 import StockItem, { CATEGORIES } from "../entities/StockItem"
 import { useRef, useState } from "react"
 import useStock from "../hooks/useStock"
+import { useNavigate } from "react-router-dom"
 
 
 export default function ItemForm({ itemToUpdate }) {
+  const navigate = useNavigate()
+
   const defaultItem = {
     name: "",
     description: "",
@@ -27,6 +30,7 @@ export default function ItemForm({ itemToUpdate }) {
       if (itemToUpdate) {
         updateItem(itemToUpdate.id, item)
         alert("Item atualizado com sucesso!")
+        navigate("/items")
       } else {
         const validItem = new StockItem(item)
         addItem(validItem)
